@@ -1,5 +1,6 @@
 # Bookings and Reservations
 
+Stack (Golang, PostgreSQL, Bootstrap, Jquerry)
 Repository for my bookings and reservations project.
 
 - Built in Go version 1.16
