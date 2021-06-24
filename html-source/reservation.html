@@ -18,8 +18,9 @@
             font-size: 80%;
         }
 
-        .room-image {
-            max-width: 50%;
+
+        .myPara {
+            color: red;
         }
     </style>
 </head>
@@ -73,7 +74,7 @@
             <div class="col-md-6 text-center">
                 <h1 class="mt-5">Search for Availability</h1>
 
-                <form action="/reservation.html" method="GET">
+                <form action="/reservation.html" method="GET" novalidate class="needs-validation">
                     <div class="row">
                         <div class="col">
                             <div class="mb-3">
@@ -101,7 +102,12 @@
             </div>
         </div>
     </div>
-
+    <div class="row">
+        <div class="col">
+            <p id="mypara">This is a para.</p>
+            <button id="Button">Click me</button>
+        </div>
+    </div>
     <div class="row my-footer">
         <div class="col">
             left
@@ -119,6 +125,37 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
         crossorigin="anonymous"></script>
+
+    <script>
+
+
+       
+        (function () {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
+
+        let btn = document.getElementById("Button")
+        btn.addEventListener("click", function () {
+            let pTag = document.getElementById("mypara")
+            pTag.classList.add("myPara")
+        })
+    </script>
 </body>
 
 </html>
