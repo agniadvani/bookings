@@ -1,13 +1,64 @@
 {{template "base" .}}
 
 {{define "content"}}
-<body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>This is the home page.</h1>
-            </div>
+<div id="main-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="/static/images/woman-laptop.png" class="d-block w-100" alt="Woman holding a loptop">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>First slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
         </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="/static/images/tray.png" class="d-block w-100" alt="tray and bed">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Second slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+
+      <div class="carousel-item">
+        <img src="/static/images/outside.png" class="d-block w-100" alt="outside view">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>Third slide label</h5>
+          <p>Some representative placeholder content for the first slide.</p>
+        </div>
+      </div>
+
     </div>
-</body>
+    <button class="carousel-control-prev" type="button" data-bs-target="#main-carousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#main-carousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h1 class="text-center mt-4">Welcome to Merritons Bed and Breakfast</h1>
+        <p class="text-center">Bringing people together is what we’ve done since opening our first Sheraton in
+          1937. Now we’re deeply rootedin over 400 communities across the globe. We are proud to act as a point of
+          connection for millions of
+          travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
+          Sheraton in 1937. Now we’re deeply rooted
+          in over 400 communities across the globe. We are proud to act as a point of connection for millions of
+          travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
+          Sheraton in 1937. Now we’re deeply rooted
+          in over 400 communities across the globe. We are proud to act as a point of connection for millions of
+          travelers, many just like you. Welcome.</p>
+      </div>
+
+      <div class="row">
+        <div class="col text-center">
+          <a href="/search-availability" class="btn btn-success">Make Reservation</a>
+        </div>
+      </div>
+    </div>
+
 {{end}}

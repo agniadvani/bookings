@@ -17,10 +17,13 @@ func router(app *config.AppConfig) http.Handler {
 	mux.Use(SessionLoad)
 	mux.Get("/", handler.Repo.Home)
 	mux.Get("/about", handler.Repo.About)
+	mux.Get("/contact", handler.Repo.Contact)
+	mux.Get("/majors-suite", handler.Repo.Majors)
+	mux.Get("/presidential-suite",handler.Repo.Presidential)
+	mux.Get("/search-availability", handler.Repo.SearchAvailability)
+	mux.Get("/make-reservation", handler.Repo.MakeReservation)
 
 	fileServer := http.FileServer(http.Dir("./static/"))
-
-	
 	mux.Handle("/static/*", http.StripPrefix("/static",fileServer))
 	return mux
 }
