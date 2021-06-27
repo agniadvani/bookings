@@ -6,8 +6,8 @@ import (
 	"path/filepath"
 	"text/template"
 
-	"github.com/agniadvani/bookings/pkg/config"
-	"github.com/agniadvani/bookings/pkg/models"
+	"github.com/agniadvani/bookings/internal/config"
+	"github.com/agniadvani/bookings/internal/models"
 	"github.com/justinas/nosurf"
 )
 

@@ -3,8 +3,8 @@ package main
 import (
 	"net/http"
 
-	"github.com/agniadvani/bookings/pkg/config"
-	handler "github.com/agniadvani/bookings/pkg/handlers"
+	"github.com/agniadvani/bookings/internal/config"
+	handler "github.com/agniadvani/bookings/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )
@@ -23,7 +23,7 @@ func router(app *config.AppConfig) http.Handler {
 
 	mux.Get("/search-availability", handler.Repo.SearchAvailability)
 	mux.Post("/search-availability", handler.Repo.PostSearchAvailability)
-	mux.Get("/search-availability-json", handler.Repo.SearchAvailabilityJson)
+	mux.Post("/search-availability-json", handler.Repo.SearchAvailabilityJson)
 
 	mux.Get("/make-reservation", handler.Repo.MakeReservation)
 

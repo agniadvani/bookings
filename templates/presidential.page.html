@@ -2,42 +2,42 @@
 
 {{define "content"}}
 <div class="containter">
+  <div class="row">
+    <div class="col">
+      <img src="/static/images/generals-quarters.png" alt="room 1"
+        class="mx-auto d-block img-fluid img-thumbnail room-image">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1 class="text-center mt-4">Presidential Suite</h1>
+      <p class="text-center">Bringing people together is what we’ve done since opening our first Sheraton in
+        1937. Now we’re deeply rootedin over 400 communities across the globe. We are proud to act as a point of
+        connection for millions of
+        travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
+        Sheraton in 1937. Now we’re deeply rooted
+        in over 400 communities across the globe. We are proud to act as a point of connection for millions of
+        travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
+        Sheraton in 1937. Now we’re deeply rooted
+        in over 400 communities across the globe. We are proud to act as a point of connection for millions of
+        travelers, many just like you. Welcome.</p>
+    </div>
+
     <div class="row">
-      <div class="col">
-        <img src="/static/images/generals-quarters.png" alt="room 1"
-          class="mx-auto d-block img-fluid img-thumbnail room-image">
+      <div class="col text-center">
+        <a href="#!" id="check-availability-btn" class="btn btn-success">Check Availability</a>
       </div>
     </div>
   </div>
+  {{end}}
 
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1 class="text-center mt-4">Presidential Suite</h1>
-        <p class="text-center">Bringing people together is what we’ve done since opening our first Sheraton in
-          1937. Now we’re deeply rootedin over 400 communities across the globe. We are proud to act as a point of
-          connection for millions of
-          travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
-          Sheraton in 1937. Now we’re deeply rooted
-          in over 400 communities across the globe. We are proud to act as a point of connection for millions of
-          travelers, many just like you. Welcome.Bringing people together is what we’ve done since opening our first
-          Sheraton in 1937. Now we’re deeply rooted
-          in over 400 communities across the globe. We are proud to act as a point of connection for millions of
-          travelers, many just like you. Welcome.</p>
-      </div>
-
-      <div class="row">
-        <div class="col text-center">
-            <a href="#!" id="check-availability-btn" class="btn btn-success">Check Availability</a>
-        </div>
-      </div>
-    </div>
-{{end}}
-
-{{define "js"}}
-<script>
+  {{define "js"}}
+  <script>
     document.getElementById("check-availability-btn").addEventListener("click", function () {
-        let html = `
+      let html = `
                     <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
                         <div class="form-row">
                             <div class="col">
@@ -54,10 +54,44 @@
                         </div>
                     </form>
                     `
-        attention.custom({
-            title: 'Choose your dates',
-            msg: html,
-        });
+
+
+
+      attention.custom({
+        title: 'Choose your dates',
+        msg: html,
+        callback: function (result) {
+          let form = document.getElementById("check-availability-form")
+          let formData = new FormData(form)
+          formData.append("csrf_token", "{{.CSRFtoken}}")
+          fetch("/search-availability-json", {
+            method: "post",
+            body: formData,
+          })
+            .then(Response => Response.json())
+            .then(Data => {
+              console.log(Data.ok)
+              console.log(Data.message)
+            })
+        },
+        willOpen: () => {
+          const elem = document.getElementById("reservation-dates-modal");
+          const rp = new DateRangePicker(elem, {
+            format: 'yyyy-mm-dd',
+            showOnFocus: true,
+          })
+        },
+        didOpen: () => {
+          document.getElementById("start").removeAttribute("disabled");
+          document.getElementById("end").removeAttribute("disabled");
+        },
+        preConfirm: () => {
+          return [
+            document.getElementById('start').value,
+            document.getElementById('end').value
+          ]
+        },
+      });
     })
-</script>
-{{end}}
+  </script>
+  {{end}}

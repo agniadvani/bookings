@@ -5,9 +5,9 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/agniadvani/bookings/pkg/config"
-	"github.com/agniadvani/bookings/pkg/models"
-	render "github.com/agniadvani/bookings/pkg/renders"
+	"github.com/agniadvani/bookings/internal/config"
+	"github.com/agniadvani/bookings/internal/models"
+	render "github.com/agniadvani/bookings/internal/renders"
 )
 
 //A variable used to reference outide the package scope values
@@ -76,8 +76,6 @@ func (m *Repository) SearchAvailabilityJson(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	log.Println(string(bs))
 	w.Header().Set("Content-Type","application/json")
 	w.Write(bs)
 }
