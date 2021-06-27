@@ -8,6 +8,7 @@ import (
 
 	"github.com/agniadvani/bookings/pkg/config"
 	"github.com/agniadvani/bookings/pkg/models"
+	"github.com/justinas/nosurf"
 )
 
 //Adds user-defined functions to the templates
@@ -22,13 +23,13 @@ func NewTemplate(a *config.AppConfig) {
 }
 
 //Adds default data to be parsed in every template
-func AddDefaultData(td *models.TemplateData) *models.TemplateData {
-
+func AddDefaultData(r *http.Request, td *models.TemplateData) *models.TemplateData {
+	td.CSRFtoken = nosurf.Token(r)
 	return td
 }
 
 //Finds the parsed template from the map and executes it. To be used by the handlers.
-func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData) {
+func RenderTemplate(w http.ResponseWriter,r *http.Request ,tmpl string, td *models.TemplateData) {
 	var tc map[string]*template.Template
 
 	if app.UseCache {
@@ -41,7 +42,7 @@ func RenderTemplate(w http.ResponseWriter, tmpl string, td *models.TemplateData)
 		log.Fatalln("No template found.")
 	}
 
-	td = AddDefaultData(td)
+	td = AddDefaultData(r,td)
 	err := t.Execute(w, td)
 	if err != nil {
 		log.Fatalln(err)
